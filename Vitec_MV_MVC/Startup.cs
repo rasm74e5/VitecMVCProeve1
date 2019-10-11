@@ -11,14 +11,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Vitec_MV_MVC.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Vitec_MV_MVC
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
+            _logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -45,12 +48,17 @@ namespace Vitec_MV_MVC
         {
             if (env.IsDevelopment())
             {
+                _logger.LogInformation("In Development environment");
+                app.UseDeveloperExceptionPage();
+            }
+            else if (env.IsProduction())
+            {
+                _logger.LogInformation("In Production environment");
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 

@@ -20,10 +20,10 @@
 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description) af produktet
+                @Html.DisplayNameFor(model => model.Description) af produktet
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Price)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th></th>
         </tr>
@@ -36,7 +36,7 @@
             </script>*@
         @{int count = 0;
             string style = "background-color: #f2f2f2;cursor: Pointer;";}
-        @foreach (var item in Model.Product)
+        @foreach (var item in Model)
         {
 
 
